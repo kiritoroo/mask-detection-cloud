@@ -1,0 +1,67 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <textarea placeholder="your message..." id="texta" rows="33" cols="20" ></textarea>
+
+    <div id="myForm">
+        <form>
+            <h1>Chat</h1>
+            <label for="msg"><b>Message</b></label>
+            <textarea placeholder="Type message..." id="msg" name="msg" required></textarea>
+        
+            <button type="button" id="send">Send</button>
+        </form>
+    </div>
+
+    <script>
+        function getCookie(cookieName) {
+            let cookie = {};
+            document.cookie.split(';').forEach(function(el) {
+                let [key,value] = el.split('=');
+                cookie[key.trim()] = value;
+            })
+            return cookie
+            ie[cookieName];
+        }
+        
+        function parseJwt (token) {
+            var base64Url = token.split('.')[1];
+            var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+            var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
+                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+            }).join(''));
+        
+            return JSON.parse(jsonPayload);
+        }
+
+        const token = getCookie('jwt')
+        const token_decode = parseJwt(token['jwt'])
+
+        console.log(token_decode)
+
+        const url = "ws://" + location.hostname + ':' + location.port + "/ws/" + token_decode['sub']
+        var ws = new WebSocket(url);
+    
+        ws.onopen = (event) => {
+            ws.send("Connect");
+        };
+        
+        ws.onmessage = function(event) {
+            const message = JSON.parse(event.data);
+            var logs = document.getElementById('texta')
+            logs.value+="Received:"+event.data+"\n";
+        };
+    
+        function sendt(){
+            var v=document.getElementById("texta");
+            var msg=document.getElementById("msg").value;
+            ws.send(msg);
+            var msg="Sent:"+msg+"\n";
+            v.value+=msg;
+        }
+    
+        const send_button = document.querySelector("#send");
+        send_button.addEventListener("click", sendt);
+    
+    </script>
+{% endblock %}
