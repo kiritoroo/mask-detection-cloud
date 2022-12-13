@@ -7,7 +7,7 @@ members = [
     },
     {
         "id": "20110135", 
-        "name": "Nguyen Thi Thanh Tuyet", 
+        "name": "Lê Thi Thanh Tuyet", 
         "github": "https://github.com/Snow-3", 
         "avatar": "/static/3d-girl-avatar.webp"
     },
