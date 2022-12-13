@@ -5,7 +5,7 @@ from fastapi.staticfiles import StaticFiles
 from service.constant import *
 import os
 
-PORT = os.environ.get('APP_POST') or 8080
+PORT = os.environ.get('APP_PORT') or 8080
 
 app = FastAPI()
 templates = Jinja2Templates(directory="templates")
