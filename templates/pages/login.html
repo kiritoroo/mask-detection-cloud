@@ -1,0 +1,14 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <form id="form-register" method="POST" action="/login">
+        <input type="text" name="username" value={{user.username}}>
+        <input type="password" name="password">
+        <button type="submit">Submit</button>
+    </form>
+    <h2>{{message}}</h2>
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}

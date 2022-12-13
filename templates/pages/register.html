@@ -1,0 +1,42 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <form method="POST">
+        <input type="email" name="email"/>
+        <input type="text" name="username"/>
+        <input type="text" name="phone"/>
+        <input type="password" name="password"/>
+        <button type="submit">Submit</button>
+    </form>
+    <h2>{{message}}</h2>
+{% endblock %}
+
+{% block script %}
+<script>
+    const form = document.querySelector("#form-register");
+    form.addEventListener('submit', (e) => handleSubmit(e));
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        const email = form.querySelector('input[name="username"]').value
+        const password = form.querySelector('input[name="password"]').value
+        const username = form.querySelector('input[name="email"]').value
+        const phone = form.querySelector('input[name="phone"]').value
+
+        await fetch('/register', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: email,
+                username: username,
+                password: password,
+                phone: phone
+            })
+        })
+    }
+</script>
+{% endblock %}

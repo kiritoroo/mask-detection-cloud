@@ -1,45 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.5/dist/flowbite.min.css" />
-    <script src="https://unpkg.com/flowbite@1.5.5/dist/flowbite.js"></script>
-    <link rel="icon" href="/static/3d-cloud.jpg">
-    <title>Mask Detection on Cloud</title>
-</head>
-<body>
-    <div class="w-screen h-screen bg-blue-50 px-24 py-24">
-        <div class="h-full w-full bg-white rounded-2xl w-full drop-shadow-xl overflow-hidden">
-            <div class="h-full w-full flex flex-col items-center justify-center">
-                <!-- S Member Info -->
-                <div class="flex flex-row gap-10">
-                    {% for member in members %}
-                        <div class="m-auto">
-                            <div class="flex flex-col max-w-md shadow-md py-8 px-10 md:px-8 rounded-md bg-gradient-to-r from-blue-50 to-pink-50 hover:bg-gradient-to-l hover:from-blue-50 hover:to-pink-50 hover:ring-4 hover:outline-none hover:ring-blue-100">
-                                <div class="flex flex-col md:flex-row gap-6 md:gap-8">
-                                    <img class="rounded-full w-32 mx-auto" src={{member.avatar}} alt="" />
-                                    <div class="flex flex-col text-center md:text-left">
-                                        <div class="font-medium text-lg text-gray-800">{{member.name}}</div>
-                                        <div class="text-gray-500 mb-3 whitespace-nowrap">{{member.id}}</div>
-                                        <div class="flex flex-row gap-4 text-gray-800 my-auto text-2xl mx-auto md:mx-0">
-                                            <a href={{member.github}} target="_blank" rel="noopener nofollow noreferrer" class="inline-flex items-center px-4 py-2 mr-3 text-xs font-medium text-gray-900 bg-white border border-pink-200 rounded-lg focus:outline-none hover:bg-pink-50 hover:text-blue-600 focus:z-10 focus:ring-2 focus:ring-pink-300">
-                                                <img src="/static/icon-github.svg" class="w-4 h-4 mr-2"/>
-                                                GitHub
-                                            </a>
-                                        </div>
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="w-screen h-screen bg-blue-50 px-24 py-24">
+    <div class="h-full w-full bg-white rounded-2xl w-full drop-shadow-xl overflow-hidden">
+        <div class="h-full w-full flex flex-col items-center justify-center">
+            <!-- S Member Info -->
+            <div class="flex flex-row gap-10">
+                {% for member in members %}
+                    <div class="m-auto">
+                        <div class="flex flex-col max-w-md shadow-md py-8 px-10 md:px-8 rounded-md bg-gradient-to-r from-blue-50 to-pink-50 hover:bg-gradient-to-l hover:from-blue-50 hover:to-pink-50 hover:ring-4 hover:outline-none hover:ring-blue-100">
+                            <div class="flex flex-col md:flex-row gap-6 md:gap-8">
+                                <img class="rounded-full w-32 mx-auto" src={{member.avatar}} alt="" />
+                                <div class="flex flex-col text-center md:text-left">
+                                    <div class="font-medium text-lg text-gray-800">{{member.name}}</div>
+                                    <div class="text-gray-500 mb-3 whitespace-nowrap">{{member.id}}</div>
+                                    <div class="flex flex-row gap-4 text-gray-800 my-auto text-2xl mx-auto md:mx-0">
+                                        <a href={{member.github}} target="_blank" rel="noopener nofollow noreferrer" class="inline-flex items-center px-4 py-2 mr-3 text-xs font-medium text-gray-900 bg-white border border-pink-200 rounded-lg focus:outline-none hover:bg-pink-50 hover:text-blue-600 focus:z-10 focus:ring-2 focus:ring-pink-300">
+                                            <img src="/static/icon-github.svg" class="w-4 h-4 mr-2"/>
+                                            GitHub
+                                        </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    {% endfor %}
-                </div>
-                <!-- E Member Info -->
+                    </div>
+                {% endfor %}
             </div>
+            <!-- E Member Info -->
         </div>
     </div>
-</body>
-</html>
+</div>
+{% endblock %}
