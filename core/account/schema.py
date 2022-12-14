@@ -7,6 +7,7 @@ class AccountSchemaBase(BaseModel):
     username: str
     email: Optional[EmailStr]
     phone: Optional[int]
+    gender: str
 
 class AccountSchemaCreate(AccountSchemaBase):
     password: str = Field(..., min_length=5)

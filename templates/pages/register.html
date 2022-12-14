@@ -1,41 +1,87 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-    <form method="POST">
-        <input type="email" name="email"/>
-        <input type="text" name="username"/>
-        <input type="text" name="phone"/>
-        <input type="password" name="password"/>
-        <button type="submit">Submit</button>
-    </form>
-    <h2>{{message}}</h2>
+    <div class="container mx-auto">
+        <div class="flex justify-center px-6 my-12">
+            <!-- Row -->
+            <div class="w-full xl:w-3/4 lg:w-11/12 flex justify-center align-center">
+                <!-- Col -->
+                <div class="w-full lg:w-1/2 bg-white p-5 rounded-lg lg:rounded-l-none">
+                    <h3 class="py-8 font-bold text-3xl text-center text-blue-300">Register New Account!</h3>
+                    <form id="form-register" method="POST" action="/register" class="px-8 pt-6 pb-8 mb-4 shadow-md bg-gradient-to-r from-blue-50 to-pink-50 rounded-lg">
+                        <div class="mb-4">
+                            <label class="block mb-2 text-lg font-medium text-gray-600" for="username">
+                                Email
+                            </label>
+                            <input
+                                class="w-full px-3 py-4 text-sm leading-tight text-gray-700 border border-pink-200 rounded-lg shadow appearance-none focus:outline-none focus:shadow-outline"
+                                id="email"
+                                name="email"
+                                type="email"
+                                placeholder="guest@zing.vn" 
+                                required
+                            />
+                        </div>
+                        <div class="mb-4">
+                            <label class="block mb-2 text-lg font-medium text-gray-600" for="username">
+                                Username
+                            </label>
+                            <input
+                                class="w-full px-3 py-4 text-sm leading-tight text-gray-700 border border-pink-200 rounded-lg shadow appearance-none focus:outline-none focus:shadow-outline"
+                                id="username"
+                                name="username"
+                                type="text"
+                                placeholder="guest"
+                                required
+                            />
+                        </div>
+                        <div class="mb-4">
+                            <label class="block mb-2 text-lg font-medium text-gray-600" for="password">Password</label>
+                            <input
+                                class="w-full px-3 py-4 text-sm leading-tight text-gray-700 border border-pink-200 rounded-lg shadow appearance-none focus:outline-none focus:shadow-outline"
+                                id="password"
+                                name="password"
+                                type="password"
+                                placeholder="**********"
+                                required
+                            />
+                        </div>
+                        <input class="hidden" type="text" name="phone" value="123456789" hidden/>
 
-    <script>
-        console.log("haha")
-        const form = document.querySelector("#form-register");
-        form.addEventListener('submit', (e) => handleSubmit(e));
-    
-        const handleSubmit = (e) => {
-            e.preventDefault();
-    
-            const email = form.querySelector('input[name="username"]').value
-            const password = form.querySelector('input[name="password"]').value
-            const username = form.querySelector('input[name="email"]').value
-            const phone = form.querySelector('input[name="phone"]').value
-    
-            await fetch('/register', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json, text/plain, */*',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    email: email,
-                    username: username,
-                    password: password,
-                    phone: phone
-                })
-            })
-        }
-    </script>
+                        <div class="flex flex-row justify-center gap-10 my-10">
+                            <div class="form-check">
+                                <input checked="checked" name="gender" value="male" class="form-check-input appearance-none rounded-full h-4 w-4 border border-pink-200 bg-white checked:bg-blue-400 checked:border-blue-400 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                <label class="form-check-label inline-block text-gray-800" for="flexRadioDefault1">
+                                Male
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input name="gender" value="female" class="form-check-input appearance-none rounded-full h-4 w-4 border border-pink-200 bg-white checked:bg-blue-400 checked:border-blue-400 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                Female
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="mb-6 text-center">
+                            <button
+                                class="w-full px-4 py-4 font-bold text-white bg-gradient-to-r from-blue-200 to-blue-200 rounded-lg hover:bg-gradient-to-r hover:from-blue-300 hover:to-blue-300 hover:ring-4 hover:outline-none hover:ring-indigo-100"
+                                type="submit"
+                            >
+                                Sign Up
+                            </button>
+                        </div>
+                        <div class="my-3 text-md text-center text-gray-500">
+                            <h2>{{message}}</h2>
+                        </div>
+                        <hr class="mb-6 border-t" />
+                        <div class="text-center">
+                            <a href="/login" class="inline-block text-sm text-blue-400 align-baseline hover:text-blue-600">
+                                Sign In now!
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

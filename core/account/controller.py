@@ -19,7 +19,10 @@ account_router = APIRouter(tags=['Account'])
 def login(request: Request):
     return templates.TemplateResponse(
         "pages/register.html",
-        {"request": request, "message": "Register new account"}
+        {
+            "request": request,
+            "message": "Register new account"
+        }
     )
 
 @account_router.post('/register', **account_response_data.get('register'))
@@ -29,15 +32,18 @@ async def register(
     email: str = Form(),
     username: str = Form(),
     password: str = Form(),
+    gender: str = Form(),
     phone: str = Form(),
     service_data=Depends(get_account_service)
 ):
     result = await AccountService(**service_data) \
         .register(user_data=AccountSchemaCreate(
-            username=username,
             email=email,
+            username=username,
             password=password,
-            phone=phone))
+            gender=gender,
+            phone=phone
+        ))
         
     if "message" in result:
         return templates.TemplateResponse(

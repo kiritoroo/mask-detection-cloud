@@ -1,6 +1,6 @@
 <div class="flex flex-col w-80 h-full px-4 py-8 bg-gray-50 shadow-md overflow-auto">
     <div class="flex flex-col items-center mt-6 -mx-2">
-        <img class="object-cover w-32 h-32 mx-2 rounded-full" src="/static/3d-boy-avatar.webp" alt="avatar">
+        <img id="user_avatar" class="object-cover w-32 h-32 mx-2 rounded-full" src="/static/3d-guest-avatar.webp" alt="avatar">
         <h2 id="username_label" class="mx-2 mt-2 text-2xl font-semibold text-gray-800">Guest</h2>
         <p id="email_label" class="mx-2 mt-1 text-lg font-medium text-gray-600">guest@email.com</p>
     </div>
@@ -45,6 +45,7 @@
 <script>
     const username_label = document.querySelector("#username_label");
     const email_label = document.querySelector("#email_label");
+    const user_avatar = document.querySelector("#user_avatar");
 
     const login_button = document.querySelector("#login_button");
     const register_button = document.querySelector("#register_button");
@@ -76,6 +77,8 @@
     if (token["jwt"] === undefined) {
         username_label.innerHTML = "Guest";
         email_label.innerHTML = "guest@zing.vn";
+        user_avatar.src = "/static/3d-guest-avatar.webp"
+
         login_button.style.display = 'flex'
         register_button.style.display = 'flex'
         logout_button.style.display = 'none'
@@ -83,6 +86,9 @@
         const token_decode = parseJwt(token['jwt'])
         username_label.innerHTML = token_decode['sub'];
         email_label.innerHTML = token_decode['email'];
+        token_decode['gender'] == 'male' 
+            ? user_avatar.src = "/static/3d-boy-avatar.webp"
+            : user_avatar.src = "/static/3d-girl-avatar.webp"
 
         login_button.style.display = 'none'
         register_button.style.display = 'none'
