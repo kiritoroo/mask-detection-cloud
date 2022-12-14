@@ -7,7 +7,7 @@ import os
 
 from core.account.controller import account_router
 from core.chat.controller import websocket_router
-from core.constant import members
+from core.constant import members, mentor
 
 PORT = os.environ.get('APP_PORT') or 8080
 
@@ -36,7 +36,12 @@ app.add_middleware(
 def main(request: Request):
     return templates.TemplateResponse(
         "index.html",
-        {"request": request, "members": members})
+        {
+            "request": request, 
+            "members": members,
+            "mentor": mentor
+        }
+    )
 
 if __name__ == "__main__":
     uvicorn.run(

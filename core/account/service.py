@@ -24,11 +24,13 @@ class AccountService(AccountServiceInterface):
         
         access_token = await self._create_token_data(
             username=user['username'],
+            email=user['email'],
             token_type=TokenType.ACCESS_TOKEN,
             exp_time=int(5))
 
         refresh_toekn = await self._create_token_data(
             username=user['username'],
+            email=user['email'],
             token_type=TokenType.REFRESH_TOKEN,
             exp_time=int(10))
         return {
@@ -63,9 +65,10 @@ class AccountService(AccountServiceInterface):
     async def detail_user(self, user_id: str):
         return await self._repository.detail_user(user_id=user_id)
 
-    async def _create_token_data(self, username: str, token_type: TokenType, exp_time: int):
+    async def _create_token_data(self, username: str, email:str, token_type: TokenType, exp_time: int):
         return await self._token_service.encode_token(
             username=username,
+            email=email,
             token_type=token_type,
             secret_key='CLOUD',
             algorithm='HS256',

@@ -42,7 +42,10 @@ async def register(
     if "message" in result:
         return templates.TemplateResponse(
             "pages/register.html",
-            {"request": request, "message": result['message']}
+            {
+                "request": request, 
+                "message": result['message']
+            }
         )
         
     return templates.TemplateResponse(
@@ -64,6 +67,12 @@ def login(request: Request):
             "message": "Enter username and password"
         }
     )
+    
+@account_router.get("/logout")
+def login(request: Request, response: Response):
+    response = RedirectResponse(url='/login')
+    response.delete_cookie(key='jwt')
+    return response
 
 @account_router.post('/login', **account_response_data.get('login'))
 async def login(

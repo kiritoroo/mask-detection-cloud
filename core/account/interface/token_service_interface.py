@@ -12,5 +12,5 @@ class TokenServiceInterface(ABC):
         pass
 
     @abstractmethod
-    async def encode_token( self, username: str, secret_key: str, algorithm: str, exp_time: int, token_type: TokenType):
+    async def encode_token( self, username: str, email:str, secret_key: str, algorithm: str, exp_time: int, token_type: TokenType):
         pass

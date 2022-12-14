@@ -44,10 +44,11 @@ class TokenService(TokenServiceInterface):
         if payload.get('token_type') != TokenType.REFRESH_TOKEN.value:
             raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Invalid type for token')
 
-    async def encode_token(self, username: str, secret_key: str, algorithm: str, exp_time: int, token_type: TokenType):
+    async def encode_token(self, username: str, email: str, secret_key: str, algorithm: str, exp_time: int, token_type: TokenType):
         expire_time = datetime.utcnow() + timedelta(minutes=exp_time)
         data = {
             'sub': username,
+            'email': email,
             'exp': expire_time,
             'token_type': token_type.value
         }

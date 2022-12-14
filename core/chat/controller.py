@@ -30,9 +30,23 @@ manager = ConnectionManager()
 
 @websocket_router.route(path='/chat', methods=['GET', 'POST'])
 def main(request: Request):
+    auth = request.cookies.get("jwt")
+    if auth == None:
+        return templates.TemplateResponse(
+            "pages/login.html",
+            {
+                "request": request,
+                "user": {"username": ""},
+                "message": "Enter username and password"
+            }
+        )
+    
     return templates.TemplateResponse(
         "pages/chat.html",
-        {"request": request})
+        {
+            "request": request,
+        }
+    )
 
 @websocket_router.websocket("/ws/{username}")
 async def websocket_endpoint(websocket: WebSocket, username: str):

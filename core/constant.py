@@ -18,3 +18,8 @@ members = [
         "avatar": "/static/3d-boy-avatar.webp"
     }
 ]
+
+mentor = {
+    "name": "Ms. Trương Thị Ngọc Phượng",
+    "avatar": "/static/3d-woman-menter.webp"
+}

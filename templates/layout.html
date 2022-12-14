@@ -12,7 +12,17 @@
     <title>Mask Detection on Cloud</title>
 </head>
 <body>
-    {% block content %}
-    {% endblock %}
+    <!-- Container -->
+    <div class="w-screen h-screen bg-blue-50 px-12 py-12">
+        <div class="h-full w-full bg-white rounded-2xl w-full drop-shadow-xl overflow-hidden">
+            <div class="h-full w-full flex flex-row">
+                {% include "sidebar.html" %}
+                <div class="h-full w-full"> 
+                    {% block content %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
