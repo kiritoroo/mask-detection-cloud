@@ -52,7 +52,7 @@ def main(request: Request):
 async def websocket_endpoint(websocket: WebSocket, username: str):
     await manager.connect(websocket)
     now = datetime.now()
-    current_time = now.strftime("%H:%M")
+    current_time = now.strftime("%I:%M %p")
     try:
         while True:
             data = await websocket.receive_text()
