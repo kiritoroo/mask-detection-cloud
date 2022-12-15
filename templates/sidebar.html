@@ -1,6 +1,6 @@
 <div class="flex flex-col w-80 h-full px-4 py-8 bg-gradient-to-br from-red-50 to-blue-50 shadow-md overflow-auto">
     <div class="flex flex-col items-center mt-6 -mx-2">
-        <img id="user_avatar" class="object-cover w-32 h-32 mx-2 rounded-full" src="/static/3d-guest-avatar.webp" alt="avatar">
+        <img id="user_avatar" class="object-cover w-32 h-32 mx-2 rounded-full" src="/static/images/3d-guest-avatar.webp" alt="avatar">
         <h2 id="username_label" class="mx-2 mt-2 text-2xl font-semibold text-gray-800">Guest</h2>
         <p id="email_label" class="mx-2 mt-1 text-lg font-medium text-gray-600">guest@email.com</p>
     </div>
@@ -8,17 +8,17 @@
     <div class="flex flex-col justify-between flex-1 mt-6">
         <nav>
             <a href="/chat" class="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-lg hover:text-gray-700 hover:bg-gradient-to-r from-blue-100 to-red-100" href="#">
-                <img src="/static/icon-chat.svg" class="w-5 h-5 mr-2"/>
+                <img src="/static/images/icon-chat.svg" class="w-5 h-5 mr-2"/>
                 <span class="mx-4 font-medium">Chat Service</span>
             </a>
 
-            <a class="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-lg hover:text-gray-700 hover:bg-gradient-to-r from-blue-100 to-red-100" href="#">
-                <img src="/static/icon-ai.svg" class="w-5 h-5 mr-2"/>
+            <a href="/ai" class="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-lg hover:text-gray-700 hover:bg-gradient-to-r from-blue-100 to-red-100" href="#">
+                <img src="/static/images/icon-ai.svg" class="w-5 h-5 mr-2"/>
                 <span class="mx-4 font-medium">AI Service</span>
             </a>
 
             <a href="/" class="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-lg hover:text-gray-700 hover:bg-gradient-to-r from-blue-100 to-red-100" href="#">
-                <img src="/static/icon-about.svg" class="w-5 h-5 mr-2"/>
+                <img src="/static/images/icon-about.svg" class="w-5 h-5 mr-2"/>
                 <span class="mx-4 font-medium">About</span>
             </a>
         </nav>
@@ -26,72 +26,20 @@
 
     <div class="flex flex-col justify-center flex-1 mt-6 border-t border-gray-200">
         <a id="login_button" href="/login" class="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-lg hover:text-gray-700 hover:bg-gradient-to-r from-blue-100 to-red-100 hover:ring-2 hover:outline-none hover:ring-indigo-50" href="#">
-            <img src="/static/icon-login.svg" class="w-5 h-5 mr-2"/>
+            <img src="/static/images/icon-login.svg" class="w-5 h-5 mr-2"/>
             <span class="mx-4 font-medium">Sign In</span>
         </a>
 
         <a id="register_button" href="/register" class="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-lg hover:text-gray-700 hover:bg-gradient-to-r from-blue-100 to-red-100 hover:ring-2 hover:outline-none hover:ring-indigo-50" href="#">
-            <img src="/static/icon-register.svg" class="w-5 h-5 mr-2"/>
+            <img src="/static/images/icon-register.svg" class="w-5 h-5 mr-2"/>
             <span class="mx-4 font-medium">Register</span>
         </a>
 
         <a id="logout_button" href="/logout" class="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-lg hover:text-gray-700 hover:bg-gradient-to-r from-blue-100 to-red-100 hover:ring-2 hover:outline-none hover:ring-indigo-50" href="#">
-            <img src="/static/icon-logout.svg" class="w-5 h-5 mr-2"/>
+            <img src="/static/images/icon-logout.svg" class="w-5 h-5 mr-2"/>
             <span class="mx-4 font-medium">Logout</span>
         </a>
     </div>
 </div>
 
-<script>
-    const username_label = document.querySelector("#username_label");
-    const email_label = document.querySelector("#email_label");
-    const user_avatar = document.querySelector("#user_avatar");
-
-    const login_button = document.querySelector("#login_button");
-    const register_button = document.querySelector("#register_button");
-    const logout_button = document.querySelector("#logout_button");
-    
-
-    // Get token & decode
-    function getCookie(cookieName) {
-        let cookie = {};
-        document.cookie.split(';').forEach(function(el) {
-            let [key,value] = el.split('=');
-            cookie[key.trim()] = value;
-        })
-        return cookie
-    }
-    
-    function parseJwt (token) {
-        var base64Url = token.split('.')[1];
-        var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-        var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
-            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-        }).join(''));
-    
-        return JSON.parse(jsonPayload);
-    }
-
-    const token = getCookie('jwt')
-    
-    if (token["jwt"] === undefined) {
-        username_label.innerHTML = "Guest";
-        email_label.innerHTML = "guest@zing.vn";
-        user_avatar.src = "/static/3d-guest-avatar.webp"
-
-        login_button.style.display = 'flex'
-        register_button.style.display = 'flex'
-        logout_button.style.display = 'none'
-    } else {
-        const token_decode = parseJwt(token['jwt'])
-        username_label.innerHTML = token_decode['sub'];
-        email_label.innerHTML = token_decode['email'];
-        token_decode['gender'] == 'male' 
-            ? user_avatar.src = "/static/3d-boy-avatar.webp"
-            : user_avatar.src = "/static/3d-girl-avatar.webp"
-
-        login_button.style.display = 'none'
-        register_button.style.display = 'none'
-        logout_button.style.display = 'flex'
-    }
-</script>
+<script src="/static/scripts/auth.js"></script>

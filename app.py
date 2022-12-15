@@ -7,6 +7,7 @@ import os
 
 from core.account.controller import account_router
 from core.chat.controller import websocket_router
+from core.ai.controller import ai_router
 from core.constant import members, mentor
 
 PORT = os.environ.get('APP_PORT') or 8080
@@ -21,6 +22,7 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 
 app.include_router(account_router)
 app.include_router(websocket_router)
+app.include_router(ai_router)
 
 origins = ["*"]
 
@@ -46,7 +48,7 @@ def main(request: Request):
 if __name__ == "__main__":
     uvicorn.run(
         "app:app",
-        host='0.0.0.0',
+        host='127.0.0.1',
         port=int(PORT),
         log_level="info",
         reload=True)

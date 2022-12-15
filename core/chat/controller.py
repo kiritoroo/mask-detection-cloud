@@ -52,7 +52,7 @@ def main(request: Request):
 async def websocket_endpoint(websocket: WebSocket, username: str):
     await manager.connect(websocket)
     now = datetime.now()
-    current_time = now.strftime("%I:%M %p")
+    current_time = now.strftime("%H:%M %p")
     try:
         while True:
             data = await websocket.receive_text()
@@ -61,6 +61,6 @@ async def websocket_endpoint(websocket: WebSocket, username: str):
             
     except WebSocketDisconnect:
         manager.disconnect(websocket)
-        message = {"time":current_time, "clientId":username, "message": "Offline"}
+        message = {"time":current_time, "clientId":username, "message": "{username} offline".format(username=username)}
         await manager.broadcast(json.dumps(message))
 
