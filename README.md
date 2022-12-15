@@ -1,4 +1,4 @@
-<h2 align="center"> ☁️ Mask Detection </h2>
+<h2 align="center"> ☁️ Chating & Mask Detection </h2>
 <p align="center">
   <a href="https://github.com/kiritoroo/mask-detection-cloud/issues">
     <img src="https://img.shields.io/github/issues/kiritoroo/mask-detection-cloud"/> 
@@ -12,6 +12,13 @@
 
 ## About
 Cloud Computing Project using Python FastAPI and deloy on Red Hat OpenShift
+
+## Features
+### Chating
+<img src="https://github.com/kiritoroo/mask-detection-cloud/blob/master/static/images/capture-chat-service.jpg" width="1000"></img>
+
+### Mask Detection
+<img src="https://github.com/kiritoroo/mask-detection-cloud/blob/master/static/images/capture-ai-service.jpg" width="1000"></img>
 
 ## Author 
 - > [Kien Trung](https://github.com/kiritoroo)
