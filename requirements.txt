@@ -13,4 +13,4 @@ python-multipart==0.0.5
 websockets==10.2
 tensorflow==2.11.0
 pillow==9.3.0
-opencv-python==4.6.0.66
+opencv-contrib-python==4.6.0.66
